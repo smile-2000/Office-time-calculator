@@ -6,119 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Office Time Calculator</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            background-color: #1a2733;
-            position: relative;
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+        background-color: #1a2733;
+        position: relative;
+    }
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+    }
+    .square {
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        animation: floatSquare 25s infinite ease-in-out;
+        opacity: 0.3;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    @keyframes floatSquare {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
         }
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
+        25% {
+            transform: translate(-150px, 200px) rotate(45deg);
         }
-        .square {
-            position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.1); /* Light color with 30% visibility */
-            border-radius: 8px;
-            animation: floatSquare 25s infinite ease-in-out; /* Slower movement with longer duration */
-            opacity: 0.3;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Drop shadow effect */
+        50% {
+            transform: translate(300px, -150px) rotate(90deg);
         }
-        
-        /* Keyframes for random movement */
-        @keyframes floatSquare {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(-150px, 200px) rotate(45deg);
-            }
-            50% {
-                transform: translate(300px, -150px) rotate(90deg);
-            }
-            75% {
-                transform: translate(-200px, -250px) rotate(135deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(180deg);
-            }
+        75% {
+            transform: translate(-200px, -250px) rotate(135deg);
         }
-        .calculator {
-            background-color: rgba(26, 39, 51, 0.95);
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            color: #ffffff;
-            width: 420px; /* Increased width for better appearance */
-            z-index: 1; /* Bring calculator above the animated background */
-            position: relative; /* Ensure it sits above squares */
+        100% {
+            transform: translate(0, 0) rotate(180deg);
         }
-        .calculator h2 {
-            margin-bottom: 20px;
-            font-size: 22px;
-            color: #b8c7d4;
-            text-align: center;
-        }
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .input-group label {
-            font-size: 16px;
-            flex: 0 0 130px; /* fixed width for label */
-            color: #b8c7d4;
-            text-align: left;
-        }
-        .input-container {
-            display: flex;
-            gap: 10px; /* space between the input fields */
-        }
-        .input-container input {
-            width: 50px;
-            padding: 8px;
-            border: 2px solid #b8c7d4; /* 2px border with color #B8C7D4 */
-            border-radius: 5px;
-            background-color: transparent; /* Remove background color */
-            color: white;
-            text-align: center;
-        }
-        .calculator button {
-            padding: 12px 24px;
-            margin: 20px auto 0; /* Center the button */
-            border: 2px solid #b8c7d4; /* Button border with color #B8C7D4 */
-            border-radius: 5px;
-            background-color: transparent; /* Transparent button */
-            color: #b8c7d4;
-            font-size: 16px; /* Increase font size */
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            display: block; /* Display button as block to center it */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add small shadow */
-        }
-        .calculator button:hover {
-            background-color: #b8c7d4;
-            color: #1a2733;
-        }
-        .calculator p {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #b8c7d4;
-            text-align: center;
-        }
-    </style>
+    }
+    .calculator {
+        background-color: rgba(26, 39, 51, 0.95);
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+        width: 420px;
+        z-index: 1;
+        position: relative;
+    }
+    .calculator h2 {
+        margin-bottom: 32px; /* Adjust space between title and the input sections */
+        font-size: 22px;
+        color: #b8c7d4;
+        text-align: center;
+        border-bottom: 1px dashed #b8c7d4;
+        padding-bottom: 24px; /* Increase padding to adjust green highlighted space */
+    }
+    .input-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px; /* Decrease vertical space between input groups */
+    }
+    .input-group label {
+        font-size: 16px;
+        flex: 0 0 130px;
+        color: #b8c7d4;
+        text-align: left;
+        margin-right: 10px; /* Reduced space between label and input */
+    }
+    .input-container {
+        display: flex;
+        gap: 10px;
+    }
+    .input-container input {
+        width: 50px;
+        padding: 6px;
+        border: 1px solid #b8c7d4;
+        border-radius: 5px;
+        background-color: transparent;
+        color: white;
+        text-align: center;
+        transition: border-color 0.2s, box-shadow 0.2s;
+	margin-top: 4px; 
+	margin-right: 8px;
+    }
+
+    .input-container input:focus {
+        border-color: #67d6ff; /* Soft teal/blue color for focus */
+        box-shadow: 0 0 5px rgba(103, 214, 255, 0.3); /* Softer blue shadow */
+        outline: none;
+    }
+
+    .calculator button {
+        padding: 12px 24px;
+        margin: 20px auto 0;
+        border: 2px solid #b8c7d4;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #b8c7d4;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        display: block;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .calculator button:hover {
+        background-color: #b8c7d4;
+        color: #1a2733;
+    }
+    .calculator p {
+        margin-top: 16px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #b8c7d4;
+        text-align: center;
+    }
+</style>
+
 </head>
 <body>
     <div class="background">
@@ -132,7 +145,7 @@
         <div class="square"></div>
     </div>
     <div class="calculator">
-        <h2>⌚😄Clock out without a doubt⌚😄</h2>
+        <h2>⌚😄 Clock out without a doubt 😄⌚</h2>
         <div class="input-group">
             <label>Shift Duration (hrs):</label>
             <div class="input-container">
