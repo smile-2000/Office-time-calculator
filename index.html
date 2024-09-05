@@ -6,132 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Office Time Calculator</title>
     <style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        overflow: hidden;
-        background-color: #1a2733;
-        position: relative;
-    }
-    .background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: -1;
-    }
-    .square {
-        position: absolute;
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        animation: floatSquare 25s infinite ease-in-out;
-        opacity: 0.3;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background-color: #1a2733;
+            position: relative;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .square {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            animation: floatSquare 25s infinite ease-in-out;
+            opacity: 0.3;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
 
-    @keyframes floatSquare {
-        0% {
-            transform: translate(0, 0) rotate(0deg);
+        @keyframes floatSquare {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(-150px, 200px) rotate(45deg);
+            }
+            50% {
+                transform: translate(300px, -150px) rotate(90deg);
+            }
+            75% {
+                transform: translate(-200px, -250px) rotate(135deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(180deg);
+            }
         }
-        25% {
-            transform: translate(-150px, 200px) rotate(45deg);
+        .calculator {
+            background-color: rgba(26, 39, 51, 0.95);
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            width: 420px;
+            z-index: 1;
+            position: relative;
         }
-        50% {
-            transform: translate(300px, -150px) rotate(90deg);
+        .calculator h2 {
+            margin-bottom: 32px;
+            font-size: 22px;
+            color: #b8c7d4;
+            text-align: center;
+            border-bottom: 1px dashed #b8c7d4;
+            padding-bottom: 24px;
         }
-        75% {
-            transform: translate(-200px, -250px) rotate(135deg);
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
         }
-        100% {
-            transform: translate(0, 0) rotate(180deg);
+        .input-group label {
+            font-size: 16px;
+            flex: 0 0 130px;
+            color: #b8c7d4;
+            text-align: left;
+            margin-right: 10px;
         }
-    }
-    .calculator {
-        background-color: rgba(26, 39, 51, 0.95);
-        padding: 30px 40px;
-        border-radius: 12px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        color: #ffffff;
-        width: 420px;
-        z-index: 1;
-        position: relative;
-    }
-    .calculator h2 {
-        margin-bottom: 32px; /* Adjust space between title and the input sections */
-        font-size: 22px;
-        color: #b8c7d4;
-        text-align: center;
-        border-bottom: 1px dashed #b8c7d4;
-        padding-bottom: 24px; /* Increase padding to adjust green highlighted space */
-    }
-    .input-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 24px; /* Decrease vertical space between input groups */
-    }
-    .input-group label {
-        font-size: 16px;
-        flex: 0 0 130px;
-        color: #b8c7d4;
-        text-align: left;
-        margin-right: 10px; /* Reduced space between label and input */
-    }
-    .input-container {
-        display: flex;
-        gap: 10px;
-    }
-    .input-container input {
-        width: 50px;
-        padding: 6px;
-        border: 1px solid #b8c7d4;
-        border-radius: 5px;
-        background-color: transparent;
-        color: white;
-        text-align: center;
-        transition: border-color 0.2s, box-shadow 0.2s;
-	margin-top: 4px; 
-	margin-right: 8px;
-    }
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        .input-container input {
+            width: 50px;
+            padding: 6px;
+            border: 1px solid #b8c7d4;
+            border-radius: 5px;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-top: 4px; 
+            margin-right: 8px;
+        }
 
-    .input-container input:focus {
-        border-color: #67d6ff; /* Soft teal/blue color for focus */
-        box-shadow: 0 0 5px rgba(103, 214, 255, 0.3); /* Softer blue shadow */
-        outline: none;
-    }
+        .input-container input:focus {
+            border-color: #67d6ff;
+            box-shadow: 0 0 5px rgba(103, 214, 255, 0.3);
+            outline: none;
+        }
 
-    .calculator button {
-        padding: 12px 24px;
-        margin: 20px auto 0;
-        border: 2px solid #b8c7d4;
-        border-radius: 5px;
-        background-color: transparent;
-        color: #b8c7d4;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        display: block;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    .calculator button:hover {
-        background-color: #b8c7d4;
-        color: #1a2733;
-    }
-    .calculator p {
-        margin-top: 16px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #b8c7d4;
-        text-align: center;
-    }
-</style>
-
+        .calculator button {
+            padding: 12px 24px;
+            margin: 20px auto 0;
+            border: 2px solid #b8c7d4;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #b8c7d4;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            display: block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .calculator button:hover {
+            background-color: #b8c7d4;
+            color: #1a2733;
+        }
+        .calculator p {
+            margin-top: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #b8c7d4;
+            text-align: center;
+            display: none; /* Initially hidden */
+        }
+    </style>
 </head>
 <body>
     <div class="background">
@@ -155,7 +155,7 @@
         <div class="input-group">
             <label>Completed Time:</label>
             <div class="input-container">
-                <input type="number" id="completedHours" placeholder="HH" min="0">
+                <input type="number" id="completedHours" placeholder="HH" min="0" max="12">
                 <input type="number" id="completedMinutes" placeholder="MM" min="0" max="59">
             </div>
         </div>
@@ -174,69 +174,99 @@
         function randomizeSquares() {
             const squares = document.querySelectorAll('.square');
             squares.forEach(square => {
-                // Set random size between 100px and 200px for larger squares
                 const size = Math.floor(Math.random() * 100) + 100;
                 square.style.width = `${size}px`;
                 square.style.height = `${size}px`;
-
-                // Set random position
                 square.style.top = `${Math.random() * 100}vh`;
                 square.style.left = `${Math.random() * 100}vw`;
-
-                // Set random animation duration and delay
-                const duration = Math.random() * 20 + 20; // Duration between 20s and 40s for slower speed
-                const delay = Math.random() * -10; // Delay between 0s and -10s
+                const duration = Math.random() * 20 + 20;
+                const delay = Math.random() * -10;
                 square.style.animationDuration = `${duration}s`;
                 square.style.animationDelay = `${delay}s`;
             });
         }
 
         function calculateTime() {
-            // Getting completed work time inputs
-            const completedHours = parseInt(document.getElementById('completedHours').value) || 0;
-            const completedMinutes = parseInt(document.getElementById('completedMinutes').value) || 0;
+            const completedHours = document.getElementById('completedHours').value;
+            const completedMinutes = document.getElementById('completedMinutes').value;
+            const lastInHours = document.getElementById('lastInHours').value;
+            const lastInMinutes = document.getElementById('lastInMinutes').value;
+            const shiftHours = document.getElementById('shiftHours').value;
 
-            // Getting last in time inputs
-            const lastInHours = parseInt(document.getElementById('lastInHours').value) || 0;
-            const lastInMinutes = parseInt(document.getElementById('lastInMinutes').value) || 0;
+            if (!completedHours && !completedMinutes && !lastInHours && !lastInMinutes && !shiftHours) {
+                return; // Do not proceed with calculation if all fields are empty
+            }
 
-            // Getting the shift duration input
-            const shiftHours = parseFloat(document.getElementById('shiftHours').value) || 8.5; // Default to 8.5 if not set
+            const completedHoursInt = parseInt(completedHours) || 0;
+            const completedMinutesInt = parseInt(completedMinutes) || 0;
+            const lastInHoursInt = parseInt(lastInHours) || 0;
+            const lastInMinutesInt = parseInt(lastInMinutes) || 0;
+            const shiftHoursFloat = parseFloat(shiftHours) || 8.5;
 
-            // Total minutes already worked
-            const totalCompletedMinutes = (completedHours * 60) + completedMinutes;
+            // Check if completed hours exceed shift hours
+            if (completedHoursInt > shiftHoursFloat) {
+                document.getElementById('completedHours').value = shiftHoursFloat;
+                return; // Prevent calculation if the hours exceed the shift duration
+            }
 
-            // Total required work time in minutes based on shift duration
-            const requiredWorkMinutes = shiftHours * 60;
-
-            // Remaining minutes needed to complete the shift
+            const totalCompletedMinutes = (completedHoursInt * 60) + completedMinutesInt;
+            const requiredWorkMinutes = shiftHoursFloat * 60;
             const remainingMinutes = requiredWorkMinutes - totalCompletedMinutes;
-
-            // Last in time converted to minutes
-            const lastInTotalMinutes = (lastInHours * 60) + lastInMinutes;
-
-            // Calculating the time to leave
+            const lastInTotalMinutes = (lastInHoursInt * 60) + lastInMinutesInt;
             const totalLeaveMinutes = lastInTotalMinutes + remainingMinutes;
 
-            // Convert back to hours and minutes
             let leaveHours = Math.floor(totalLeaveMinutes / 60);
             const leaveMinutes = totalLeaveMinutes % 60;
 
-            // Format minutes with leading zero if needed
+            const period = leaveHours >= 12 ? 'PM' : 'AM';
+            leaveHours = leaveHours % 12;
+            leaveHours = leaveHours ? leaveHours : 12;
+
             const formattedMinutes = leaveMinutes < 10 ? '0' + leaveMinutes : leaveMinutes;
 
-            // Display the result
-            document.getElementById('result').innerText = `You can leave at: ${leaveHours}:${formattedMinutes}`;
+            const resultElement = document.getElementById('result');
+            resultElement.innerText = `You can leave at: ${leaveHours}:${formattedMinutes} ${period}`;
+            resultElement.style.display = 'block';
         }
 
-        // Add event listener for Enter key to calculate time
+        function updateMaxCompletedHours() {
+            const shiftHours = parseFloat(document.getElementById('shiftHours').value) || 0;
+            const completedHoursInput = document.getElementById('completedHours');
+            completedHoursInput.max = shiftHours;
+
+            // If completed hours exceed shift hours, adjust the value
+            if (parseInt(completedHoursInput.value) > shiftHours) {
+                completedHoursInput.value = shiftHours;
+            }
+        }
+
+        document.getElementById('shiftHours').addEventListener('input', updateMaxCompletedHours);
+
+        document.querySelectorAll('.input-container input').forEach(input => {
+            input.addEventListener('input', () => {
+                const hourInputs = ['completedHours', 'lastInHours'];
+                hourInputs.forEach(id => {
+                    const hourInput = document.getElementById(id);
+                    const correspondingMinuteInput = document.getElementById(id.replace('Hours', 'Minutes'));
+                    if (hourInput.value && !correspondingMinuteInput.value) {
+                        correspondingMinuteInput.value = 0;
+                    }
+                });
+
+                document.getElementById('result').style.display = 'none';
+            });
+
+            input.addEventListener('focus', () => {
+                document.getElementById('result').style.display = 'none';
+            });
+        });
+
         document.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 calculateTime();
             }
         });
 
-        // Randomize square positions and animations on load
         window.onload = randomizeSquares;
     </script>
 </body>
