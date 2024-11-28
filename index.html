@@ -5,133 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Office Time Calculator</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            background-color: #1a2733;
-            position: relative;
-        }
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-        .square {
-            position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            animation: floatSquare 25s infinite ease-in-out;
-            opacity: 0.3;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        @keyframes floatSquare {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(-150px, 200px) rotate(45deg);
-            }
-            50% {
-                transform: translate(300px, -150px) rotate(90deg);
-            }
-            75% {
-                transform: translate(-200px, -250px) rotate(135deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(180deg);
-            }
-        }
-        .calculator {
-            background-color: rgba(26, 39, 51, 0.95);
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            color: #ffffff;
-            width: 420px;
-            z-index: 1;
-            position: relative;
-        }
-        .calculator h2 {
-            margin-bottom: 32px;
-            font-size: 22px;
-            color: #b8c7d4;
-            text-align: center;
-            border-bottom: 1px dashed #b8c7d4;
-            padding-bottom: 24px;
-        }
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        .input-group label {
-            font-size: 16px;
-            flex: 0 0 130px;
-            color: #b8c7d4;
-            text-align: left;
-            margin-right: 10px;
-        }
-        .input-container {
-            display: flex;
-            gap: 10px;
-        }
-        .input-container input {
-            width: 50px;
-            padding: 6px;
-            border: 1px solid #b8c7d4;
-            border-radius: 5px;
-            background-color: transparent;
-            color: white;
-            text-align: center;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            margin-top: 4px; 
-            margin-right: 8px;
-        }
-
-        .input-container input:focus {
-            border-color: #67d6ff;
-            box-shadow: 0 0 5px rgba(103, 214, 255, 0.3);
-            outline: none;
-        }
-
-        .calculator button {
-            padding: 12px 24px;
-            margin: 20px auto 0;
-            border: 2px solid #b8c7d4;
-            border-radius: 5px;
-            background-color: transparent;
-            color: #b8c7d4;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            display: block;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .calculator button:hover {
-            background-color: #b8c7d4;
-            color: #1a2733;
-        }
-        .calculator p {
-            margin-top: 16px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #b8c7d4;
-            text-align: center;
-            display: none; /* Initially hidden */
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking External CSS File -->
 </head>
 <body>
     <div class="background">
@@ -146,12 +20,17 @@
     </div>
     <div class="calculator">
         <h2>⌚😄 Clock out without a doubt 😄⌚</h2>
+
+        <!-- Shift Duration (hours & minutes) -->
         <div class="input-group">
-            <label>Shift Duration (hrs):</label>
+            <label>Shift Duration:</label>
             <div class="input-container">
-                <input type="number" id="shiftHours" placeholder="Hrs" min="0" max="12" step="0.5">
+                <input type="number" id="shiftHours" placeholder="HH" min="0" max="24" step="1">
+                <input type="number" id="shiftMinutes" placeholder="MM" min="0" max="59" step="1">
             </div>
         </div>
+
+        <!-- Completed Time (hours & minutes) -->
         <div class="input-group">
             <label>Completed Time:</label>
             <div class="input-container">
@@ -159,6 +38,8 @@
                 <input type="number" id="completedMinutes" placeholder="MM" min="0" max="59">
             </div>
         </div>
+
+        <!-- Last In Time (hours & minutes) -->
         <div class="input-group">
             <label>Last In Time:</label>
             <div class="input-container">
@@ -166,11 +47,13 @@
                 <input type="number" id="lastInMinutes" placeholder="MM" min="0" max="59">
             </div>
         </div>
+
         <button onclick="calculateTime()">Calculate</button>
         <p id="result">You can leave at:</p>
     </div>
 
     <script>
+        // Randomize background squares animation
         function randomizeSquares() {
             const squares = document.querySelectorAll('.square');
             squares.forEach(square => {
@@ -186,88 +69,67 @@
             });
         }
 
+        // Validate time inputs
+        function validateInputs() {
+            const shiftHours = parseInt(document.getElementById('shiftHours').value) || 0;
+            const shiftMinutes = parseInt(document.getElementById('shiftMinutes').value) || 0;
+            const completedHours = parseInt(document.getElementById('completedHours').value) || 0;
+            const completedMinutes = parseInt(document.getElementById('completedMinutes').value) || 0;
+            const lastInHours = parseInt(document.getElementById('lastInHours').value) || 0;
+            const lastInMinutes = parseInt(document.getElementById('lastInMinutes').value) || 0;
+
+            // Validate Shift Duration
+            if (shiftHours < 0 || shiftHours > 24 || shiftMinutes < 0 || shiftMinutes >= 60) {
+                alert("Please enter a valid shift duration (Hours: 0-24, Minutes: 0-59).");
+                return false;
+            }
+
+            // Validate Completed Time
+            const totalShiftMinutes = (shiftHours * 60) + shiftMinutes;
+            const totalCompletedMinutes = (completedHours * 60) + completedMinutes;
+            if (totalCompletedMinutes > totalShiftMinutes) {
+                alert("Completed time cannot exceed shift duration!");
+                return false;
+            }
+
+            // Validate Last In Time
+            if (lastInHours < 0 || lastInHours >= 24 || lastInMinutes < 0 || lastInMinutes >= 60) {
+                alert("Please enter a valid 'Last In' time (Hours: 0-23, Minutes: 0-59).");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Calculate the leave time
         function calculateTime() {
-            const completedHours = document.getElementById('completedHours').value;
-            const completedMinutes = document.getElementById('completedMinutes').value;
-            const lastInHours = document.getElementById('lastInHours').value;
-            const lastInMinutes = document.getElementById('lastInMinutes').value;
-            const shiftHours = document.getElementById('shiftHours').value;
+            if (!validateInputs()) return; // Validate inputs before calculating
 
-            if (!completedHours && !completedMinutes && !lastInHours && !lastInMinutes && !shiftHours) {
-                return; // Do not proceed with calculation if all fields are empty
-            }
+            const shiftHours = parseInt(document.getElementById('shiftHours').value) || 0;
+            const shiftMinutes = parseInt(document.getElementById('shiftMinutes').value) || 0;
+            const completedHours = parseInt(document.getElementById('completedHours').value) || 0;
+            const completedMinutes = parseInt(document.getElementById('completedMinutes').value) || 0;
+            const lastInHours = parseInt(document.getElementById('lastInHours').value) || 0;
+            const lastInMinutes = parseInt(document.getElementById('lastInMinutes').value) || 0;
 
-            const completedHoursInt = parseInt(completedHours) || 0;
-            const completedMinutesInt = parseInt(completedMinutes) || 0;
-            const lastInHoursInt = parseInt(lastInHours) || 0;
-            const lastInMinutesInt = parseInt(lastInMinutes) || 0;
-            const shiftHoursFloat = parseFloat(shiftHours) || 8.5;
-
-            // Check if completed hours exceed shift hours
-            if (completedHoursInt > shiftHoursFloat) {
-                document.getElementById('completedHours').value = shiftHoursFloat;
-                return; // Prevent calculation if the hours exceed the shift duration
-            }
-
-            const totalCompletedMinutes = (completedHoursInt * 60) + completedMinutesInt;
-            const requiredWorkMinutes = shiftHoursFloat * 60;
-            const remainingMinutes = requiredWorkMinutes - totalCompletedMinutes;
-            const lastInTotalMinutes = (lastInHoursInt * 60) + lastInMinutesInt;
+            const totalShiftMinutes = (shiftHours * 60) + shiftMinutes;
+            const totalCompletedMinutes = (completedHours * 60) + completedMinutes;
+            const remainingMinutes = totalShiftMinutes - totalCompletedMinutes;
+            const lastInTotalMinutes = (lastInHours * 60) + lastInMinutes;
             const totalLeaveMinutes = lastInTotalMinutes + remainingMinutes;
 
-            let leaveHours = Math.floor(totalLeaveMinutes / 60);
+            const leaveHours = Math.floor(totalLeaveMinutes / 60);
             const leaveMinutes = totalLeaveMinutes % 60;
 
-            const period = leaveHours >= 12 ? 'PM' : 'AM';
-            leaveHours = leaveHours % 12;
-            leaveHours = leaveHours ? leaveHours : 12;
+            const formattedHours = leaveHours % 12 || 12;
+            const period = leaveHours >= 12 ? "PM" : "AM";
+            const formattedMinutes = leaveMinutes < 10 ? "0" + leaveMinutes : leaveMinutes;
 
-            const formattedMinutes = leaveMinutes < 10 ? '0' + leaveMinutes : leaveMinutes;
-
-            const resultElement = document.getElementById('result');
-            resultElement.innerText = `You can leave at: ${leaveHours}:${formattedMinutes} ${period}`;
-            resultElement.style.display = 'block';
+            document.getElementById('result').innerText = `You can leave at: ${formattedHours}:${formattedMinutes} ${period}`;
+            document.getElementById('result').style.display = 'block';
         }
 
-        function updateMaxCompletedHours() {
-            const shiftHours = parseFloat(document.getElementById('shiftHours').value) || 0;
-            const completedHoursInput = document.getElementById('completedHours');
-            completedHoursInput.max = shiftHours;
-
-            // If completed hours exceed shift hours, adjust the value
-            if (parseInt(completedHoursInput.value) > shiftHours) {
-                completedHoursInput.value = shiftHours;
-            }
-        }
-
-        document.getElementById('shiftHours').addEventListener('input', updateMaxCompletedHours);
-
-        document.querySelectorAll('.input-container input').forEach(input => {
-            input.addEventListener('input', () => {
-                const hourInputs = ['completedHours', 'lastInHours'];
-                hourInputs.forEach(id => {
-                    const hourInput = document.getElementById(id);
-                    const correspondingMinuteInput = document.getElementById(id.replace('Hours', 'Minutes'));
-                    if (hourInput.value && !correspondingMinuteInput.value) {
-                        correspondingMinuteInput.value = 0;
-                    }
-                });
-
-                document.getElementById('result').style.display = 'none';
-            });
-
-            input.addEventListener('focus', () => {
-                document.getElementById('result').style.display = 'none';
-            });
-        });
-
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                calculateTime();
-            }
-        });
-
-        window.onload = randomizeSquares;
+        window.onload = randomizeSquares;  // Initialize background squares on page load
     </script>
 </body>
 </html>
